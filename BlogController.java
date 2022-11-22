@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,9 +55,15 @@ public class BlogController {
 	    
 	    Blog x=blogRespository.save(new Blog(title, content));
 	    //return x;
+	    
+	    /* To find the records with id > 3 */
+	    List<Blog> newlist=blogRespository.findByIdGT3();
+	    List<Blog> newtitles=blogRespository.findByTitleNative("ti");
 	    ModelAndView mav=new ModelAndView("success.html");
 	    mav.addObject("blog",x);
 	    mav.addObject("blogs",blogRespository.findAll());
+	    mav.addObject("idsgt3",newlist);
+	    mav.addObject("specifictitles",newtitles);
 	    return mav;
 	   /* if (user.equals(pwd))
 	    	return new ModelAndView("success.html");
